@@ -52,25 +52,42 @@ nav {
 
 /* Play button styling */
 .play-button {
-    background-color: #333;
-    color: #f5f5f5;
+    background-color: transparent;
+    color: white;
     border: none;
-    padding: 15px 30px;
-    font-size: 20px;
+    padding: 15px 20px;
+    font-size: 36px;
     cursor: pointer;
     position: absolute;
     top: 50%; 
-    left: 50%;
-    transform: translate(-50%, -50%); /* Center the button */
+    right: 20px; /* Align the button to the right side of the page */
+    transform: translateY(-50%); /* Center vertically */
     z-index: 2; /* Ensure the button stays on top of the video */
-    opacity: 0.8; /* Optional: Add some transparency for better aesthetics */
+    opacity: 0.8;
 }
 
 .play-button:hover {
-    background-color: #444;
     opacity: 1; /* Make fully visible on hover */
 }
 
+/* Styling for the exit button (visible from the start, in top left) */
+.exit-button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 30px;
+    cursor: pointer;
+    position: absolute;
+    top: 100px; /* Position below the nav bar */
+    left: 20px; /* Align the button to the left side */
+    z-index: 2;
+    display: block; /* Ensure the button is always visible */
+}
+
+.exit-button:hover {
+    opacity: 1; /* Fully visible on hover */
+}
 /* Fullscreen video container styling */
 .video-container {
     position: relative;
