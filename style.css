@@ -51,6 +51,8 @@ nav {
 }
 
 /* Play button styling */
+/* Styling for the play button (right arrow ">" button) */
+/* Styling for the play button (right arrow ">" button) */
 .play-button {
     background-color: transparent;
     color: white;
@@ -88,6 +90,8 @@ nav {
 .exit-button:hover {
     opacity: 1; /* Fully visible on hover */
 }
+
+
 /* Fullscreen video container styling */
 .video-container {
     position: relative;

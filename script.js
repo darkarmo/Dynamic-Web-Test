@@ -2,31 +2,10 @@
 window.addEventListener('DOMContentLoaded', (event) => {
   const video = document.getElementById('myVideo');
   const playButton = document.querySelector('.play-button');
-  let exitButton = null; // Placeholder for the dynamically created exit button
+  const exitButton = document.querySelector('.exit-button'); // Select the pre-created exit button
   let isPlaying = false;
   let isReversing = false;
   let reverseInterval = null; // To store the interval for reversing the video
-
-  // Function to create an exit button (reverse button in top left)
-  const createExitButton = () => {
-    exitButton = document.createElement('button');
-    exitButton.classList.add('exit-button');
-    exitButton.textContent = 'X'; // The exit symbol (or use an icon here if needed)
-    document.body.appendChild(exitButton);
-
-    // Event listener for the exit button to stop reversing
-    exitButton.addEventListener('click', () => {
-      // Stop the reverse process and reset everything
-      clearInterval(reverseInterval);
-      isReversing = false;
-      isPlaying = false;
-      playButton.textContent = '>'; // Show the play button (right arrow)
-      exitButton.style.display = 'none'; // Hide the exit button
-    });
-  };
-
-  // Create the exit button once the DOM is loaded
-  createExitButton();
 
   // Function to handle the play and reverse functionality
   playButton.addEventListener('click', () => {
@@ -39,8 +18,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
       playButton.textContent = 'Reverse'; // Change button text to 'Reverse'
       isPlaying = true;
 
-      // Hide the exit button when playing
-      exitButton.style.display = 'none';
     } else {
       // Pause the video and start reversing it
       video.pause();
@@ -48,9 +25,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
       // Start the reversing process
       isReversing = true;
       playButton.style.display = 'none'; // Hide the play button during reverse
-
-      // Display the exit button in the top left
-      exitButton.style.display = 'block';
 
       // Clear any previous intervals for safety
       if (reverseInterval) clearInterval(reverseInterval);
@@ -66,9 +40,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
           isPlaying = false;
           playButton.textContent = '>'; // Reset the button back to '>'
           playButton.style.display = 'block'; // Show the play button again
-          exitButton.style.display = 'none'; // Hide the exit button when done
         }
       }, 100); // Repeat every 100ms to create the reverse effect
+    }
+  });
+
+  // Functionality for the exit button (visible from the start)
+  exitButton.addEventListener('click', () => {
+    if (isReversing) {
+      // If the video is reversing, stop the reverse process
+      clearInterval(reverseInterval);
+      isReversing = false;
+      isPlaying = false;
+      playButton.textContent = '>'; // Reset play button to its initial state
+      playButton.style.display = 'block'; // Show play button again
+    } else {
+      // If the video is not reversing, you can implement additional logic here
+      alert('Video is not reversing currently.');
     }
   });
 });
