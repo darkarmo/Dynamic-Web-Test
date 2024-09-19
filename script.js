@@ -2,36 +2,49 @@
 window.addEventListener('DOMContentLoaded', (event) => {
   const video = document.getElementById('myVideo');
   const playButton = document.querySelector('.play-button');
-  const exitButton = document.querySelector('.exit-button');
+  const exitButton = document.querySelector('.exit-button'); // Select the "X" button
   let isPlaying = false;
+  let isReversing = false;
+  let reverseInterval = null; // To store the interval for reversing the video
 
-  // Initially hide the exit button (X)
-  exitButton.style.display = 'none';
-
-  // Play button functionality
+  // Function to handle the play functionality
   playButton.addEventListener('click', () => {
-    if (!isPlaying) {
-      // Play the video
-      video.play();
-      isPlaying = true;
+      // If the video is currently reversing, stop the reverse and play normally
+      if (isReversing) return;
 
-      // Move the "X" button to the top right corner and make it visible
-      exitButton.classList.add('top-right');  // Add a class to move the X button to the top-right
-      exitButton.style.display = 'block';     // Ensure the X button is visible
-      playButton.style.display = 'none';      // Hide the play button
-    } 
+      if (!isPlaying) {
+          // Play the video normally
+          video.play();
+          playButton.style.display = 'none'; // Hide the play button
+          exitButton.classList.add('show');  // Show the "X" button after playing
+          isPlaying = true;
+
+      }
   });
 
-  // Exit button (X) functionality
+  // Functionality for the reverse button ("X")
   exitButton.addEventListener('click', () => {
-    if (isPlaying) {
-      // Pause the video and stop playback
-      video.pause();
-      isPlaying = false;
+      if (isReversing) return;
 
-      // Hide the "X" button and reset its position
-      exitButton.style.display = 'none';  // Hide the X button after pausing the video
-      playButton.style.display = 'block';  // Show the play button again
-    }
+      // Pause the video and start reversing it
+      video.pause();
+      isReversing = true;
+
+      // Clear any previous intervals for safety
+      if (reverseInterval) clearInterval(reverseInterval);
+
+      // Reverse the video by reducing the current time in small intervals
+      reverseInterval = setInterval(() => {
+          if (video.currentTime > 0) {
+              video.currentTime -= 0.1; // Move the video time back by 0.1 seconds
+          } else {
+              // Stop reversing when it reaches the start
+              clearInterval(reverseInterval);
+              isReversing = false;
+              isPlaying = false;
+              playButton.style.display = 'block'; // Show the play button again
+              exitButton.classList.remove('show'); // Hide the "X" button
+          }
+      }, 100); // Repeat every 100ms to create the reverse effect
   });
 });
