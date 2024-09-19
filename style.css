@@ -11,14 +11,14 @@ body {
 nav {
     background-color: #1e1e1e; /* Slightly lighter black for the nav */
     padding: 20px;
-    position: relative; /* Ensure the nav stays in the document flow */
-    z-index: 10; /* Keep the nav on top of other elements */
+    position: relative;
+    z-index: 10;
 }
 
 /* Flexbox layout for the menu */
 .menu {
     display: flex;
-    justify-content: center; /* Centers the menu items horizontally */
+    justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -35,14 +35,14 @@ nav {
     color: #f5f5f5; /* Light grey text for the links */
     font-size: 18px;
     padding: 10px;
-    transition: color 0.3s ease, background-color 0.3s ease; /* Smooth hover transition */
+    transition: color 0.3s ease, background-color 0.3s ease;
 }
 
 /* Hover effect for the links */
 .menu a:hover {
     color: #00ccff; /* Light blue color on hover */
-    background-color: #333333; /* Darker background on hover */
-    border-radius: 5px; /* Rounded corners for the hover effect */
+    background-color: #333333;
+    border-radius: 5px;
 }
 
 /* Styling for the main content */
@@ -50,9 +50,7 @@ nav {
     text-align: center;
 }
 
-/* Play button styling */
-/* Styling for the play button (right arrow ">" button) */
-/* Styling for the play button (right arrow ">" button) */
+/* Styling for the play button (right arrow ">") */
 .play-button {
     background-color: transparent;
     color: white;
@@ -62,17 +60,17 @@ nav {
     cursor: pointer;
     position: absolute;
     top: 50%; 
-    right: 20px; /* Align the button to the right side of the page */
-    transform: translateY(-50%); /* Center vertically */
-    z-index: 2; /* Ensure the button stays on top of the video */
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 2;
     opacity: 0.8;
 }
 
 .play-button:hover {
-    opacity: 1; /* Make fully visible on hover */
+    opacity: 1;
 }
 
-/* Styling for the exit button (visible from the start, in top left) */
+/* Exit button ("X") styling - Initially hidden */
 .exit-button {
     background-color: transparent;
     color: white;
@@ -81,23 +79,31 @@ nav {
     font-size: 30px;
     cursor: pointer;
     position: absolute;
-    top: 100px; /* Position below the nav bar */
-    left: 20px; /* Align the button to the left side */
+    top: 50%; 
+    right: 20px;
+    transform: translateY(-50%);
     z-index: 2;
-    display: block; /* Ensure the button is always visible */
+    display: none;  /* Hidden by default */
+    opacity: 0.8;
 }
 
 .exit-button:hover {
-    opacity: 1; /* Fully visible on hover */
+    opacity: 1;
 }
 
+/* Move exit button to top right when video is playing */
+.exit-button.top-right {
+    top: 20px;
+    right: 20px;
+    display: block;  /* Make it visible */
+}
 
 /* Fullscreen video container styling */
 .video-container {
     position: relative;
     width: 100%;
-    height: 100vh; /* Ensure the video takes up the full height of the viewport */
-    overflow: hidden; /* Ensure the video doesn't overflow the container */
+    height: 100vh;
+    overflow: hidden;
 }
 
 .video-container video {
@@ -107,6 +113,6 @@ nav {
     min-width: 100%;
     min-height: 100%;
     transform: translate(-50%, -50%);
-    object-fit: cover; /* Ensures video covers the entire container */
-    z-index: 1; /* Video stays behind the button */
+    object-fit: cover;
+    z-index: 1;
 }
