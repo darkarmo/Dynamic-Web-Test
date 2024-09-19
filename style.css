@@ -159,6 +159,7 @@ nav {
     padding: 10px;
     box-sizing: border-box; /* Ensure padding does not affect width */
     border-radius: 8px 0 0 8px; /* Rounded corners on the left */
+    z-index: 20; /* Ensure content is on top of hover box */
 }
 
 /* Show content on hover */
