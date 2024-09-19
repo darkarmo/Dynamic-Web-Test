@@ -5,6 +5,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
   const exitButton = document.querySelector('.exit-button');
   let isPlaying = false;
 
+  // Initially hide the exit button (X)
+  exitButton.style.display = 'none';
+
   // Play button functionality
   playButton.addEventListener('click', () => {
     if (!isPlaying) {
@@ -13,8 +16,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
       isPlaying = true;
 
       // Move the "X" button to the top right corner and make it visible
-      exitButton.classList.add('top-right');  // Add a class to move the X button to top right
+      exitButton.classList.add('top-right');  // Add a class to move the X button to the top-right
       exitButton.style.display = 'block';     // Ensure the X button is visible
+      playButton.style.display = 'none';      // Hide the play button
     } 
   });
 
@@ -26,8 +30,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       isPlaying = false;
 
       // Hide the "X" button and reset its position
-      exitButton.classList.remove('top-right');
       exitButton.style.display = 'none';  // Hide the X button after pausing the video
+      playButton.style.display = 'block';  // Show the play button again
     }
   });
 });
