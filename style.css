@@ -117,6 +117,7 @@ nav {
     z-index: 1; /* Video stays behind buttons */
 }
 
+/* Hover Boxes Container */
 .hover-boxes {
     position: fixed;
     top: 50%;
@@ -129,6 +130,7 @@ nav {
     z-index: 10; /* Ensure it's on top of other content */
 }
 
+/* Individual Hover Box */
 .hover-box {
     width: 150px;
     height: 100px;
@@ -139,11 +141,27 @@ nav {
     justify-content: center;
     border-radius: 8px;
     font-size: 16px;
+    position: relative; /* For positioning the hover content */
+    overflow: hidden; /* Ensure content stays within the box */
     transition: opacity 0.3s ease;
-    border: 1px solid white; /* Add border to check visibility */
 }
 
-.hover-box:hover {
-    opacity: 1;
+/* Hover Content */
+.hover-content {
+    position: absolute;
+    top: 0;
+    left: -40%; /* Positioned outside of the hover box */
+    width: 40%; /* Width of the content box */
+    height: 100%;
+    background-color: white;
+    color: black;
+    display: none; /* Hidden by default */
+    padding: 10px;
+    box-sizing: border-box; /* Ensure padding does not affect width */
+    border-radius: 8px 0 0 8px; /* Rounded corners on the left */
 }
 
+/* Show content on hover */
+.hover-box:hover .hover-content {
+    display: block;
+}

@@ -1,14 +1,13 @@
-// Add this to your existing script
 window.addEventListener('DOMContentLoaded', (event) => {
   const video = document.getElementById('myVideo');
   const playButton = document.querySelector('.play-button');
   const exitButton = document.querySelector('.exit-button');
-  const hoverBoxes = document.querySelector('.hover-boxes'); // Select hover boxes container
+  const hoverBoxes = document.querySelector('.hover-boxes');
   let isPlaying = false;
   let isReversing = false;
   let reverseInterval = null;
 
-  // Function to handle the play functionality
+  // Play Button Event Listener
   playButton.addEventListener('click', () => {
       if (isReversing) return;
 
@@ -18,18 +17,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
           exitButton.classList.add('show');
           isPlaying = true;
 
-          // Hide hover boxes when video starts playing
-          hoverBoxes.style.display = 'none';
+          hoverBoxes.style.display = 'none'; // Hide hover boxes while playing
       }
   });
 
-  // Functionality for the reverse button ("X")
+  // Exit Button Event Listener
   exitButton.addEventListener('click', () => {
       if (isReversing) return;
 
       video.pause();
       isReversing = true;
       if (reverseInterval) clearInterval(reverseInterval);
+
+      // Hide hover boxes immediately when reverse is clicked
+      hoverBoxes.style.display = 'none';
 
       reverseInterval = setInterval(() => {
           if (video.currentTime > 0) {
@@ -40,12 +41,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
               isPlaying = false;
               playButton.style.display = 'block';
               exitButton.classList.remove('show');
-              hoverBoxes.style.display = 'flex'; // Show hover boxes when video ends
           }
       }, 100);
   });
 
-  // Show hover boxes when video ends
+  // Video End Event Listener
   video.addEventListener('ended', () => {
       hoverBoxes.style.display = 'flex'; // Ensure hover boxes are visible at video end
   });
