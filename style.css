@@ -48,6 +48,7 @@ nav {
 /* Styling for the main content */
 .content {
     text-align: center;
+    position: relative; /* For positioning the play and exit buttons */
 }
 
 /* Play button styling (">" button) */
@@ -146,23 +147,45 @@ nav {
     transition: opacity 0.3s ease;
 }
 
-/* Hover Content */
-.hover-content {
-    position: absolute;
-    top: 0;
-    left: -40%; /* Positioned outside of the hover box */
-    width: 40%; /* Width of the content box */
-    height: 100%;
+/* White Boxes Container */
+.white-boxes {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    align-items: flex-start; /* Align items to the left */
+    gap: 10px;
+    z-index: 10; /* Ensure it's on top of other content */
+}
+
+/* White Box Styling */
+.white-box {
+    width: 525px; /* 3.5 times the width of the hover box (150px * 3.5) */
+    height: 350px; /* 3.5 times the height of the hover box (100px * 3.5) */
     background-color: white;
     color: black;
     display: none; /* Hidden by default */
-    padding: 10px;
-    box-sizing: border-box; /* Ensure padding does not affect width */
-    border-radius: 8px 0 0 8px; /* Rounded corners on the left */
-    z-index: 20; /* Ensure content is on top of hover box */
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    margin-bottom: 10px; /* Space between boxes */
+    position: relative; /* For positioning */
+    overflow: hidden; /* Ensure content stays within the box */
 }
 
-/* Show content on hover */
-.hover-box:hover .hover-content {
-    display: block;
+/* Show white box on hover */
+.white-boxes.show {
+    display: flex; /* Make visible when show class is added */
+}
+
+.white-box1,
+.white-box2 {
+    display: none; /* Hidden by default */
+}
+
+.hover-box1:hover ~ .white-boxes .white-box1,
+.hover-box2:hover ~ .white-boxes .white-box2 {
+    display: flex; /* Show specific white box on hover */
 }
